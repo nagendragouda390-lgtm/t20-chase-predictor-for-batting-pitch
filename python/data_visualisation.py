@@ -24,8 +24,8 @@ cols = [
 
 import matplotlib.pyplot as plt
 
-sns.scatterplot(x = df.index , y = df.target,hue=df.successfull_chase)
+sns.pairplot(df[["target","current_balls","successfull_chase","current_wicket","current_score","current_rr","runs_per_wicket","last_5_over_runs"]],hue="successfull_chase")
 
-plt.savefig("target.png")
+plt.savefig("pairplot_with_last5.png")
 plt.show()
 

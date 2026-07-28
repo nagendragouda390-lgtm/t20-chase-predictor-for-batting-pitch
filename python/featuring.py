@@ -42,6 +42,17 @@ df["required_rr"] = df["required_runs"]*6/df["balls_left"]
 
 df["required_runs_per_wicket"] = df["required_runs"]/df["wickets_left"]
 
+
+df["last_5_over_runs"] = (
+    df.groupby(["match_id"])["runs_total"]
+      .transform(lambda x: x.rolling(30, min_periods=1).sum())
+)
+
+df["last_5_over_wickets"] = (
+    df.groupby(["match_id"])["is_wicket"]
+      .transform(lambda x: x.rolling(30, min_periods=1).sum())
+)
+
 df = df.rename(columns={"curr_ball":"current_balls",
                 "runs_target":"target"
                 })
