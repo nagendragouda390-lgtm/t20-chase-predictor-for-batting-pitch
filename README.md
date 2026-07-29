@@ -5,7 +5,7 @@ a target, using a logistic regression pipeline (OrdinalEncoder + StandardScaler
 + LogisticRegression). Includes visitor counter, prediction history, and a
 5-star rating system, all stored in SQLite.
 # website link
-[t20 chase predictor]("https://t20-chase-predictor-for-batting-pitch.onrender.com/")
+[t20 chase predictor](https://t20-chase-predictor-for-batting-pitch.onrender.com/)
 ## About the model
 
 The `model_lr.pkl` files provided earlier only contained the pipeline's
