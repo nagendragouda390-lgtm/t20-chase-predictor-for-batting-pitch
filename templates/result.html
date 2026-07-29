@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Prediction Result | Vantage Sports Analytics{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>Prediction Result</h1>
+</section>
+
+<section class="card result-card">
+  <div class="matchup">
+    <span class="team batting">{{ r.batting_team }}</span>
+    <span class="vs">chasing vs</span>
+    <span class="team bowling">{{ r.bowling_team }}</span>
+  </div>
+
+  <div class="prob-bar">
+    <div class="prob-fill" style="width: {{ r.win_probability }}%;"></div>
+  </div>
+  <div class="prob-labels">
+    <span class="prob-win">{{ r.batting_team }}: {{ r.win_probability }}%</span>
+    <span class="prob-lose">{{ r.bowling_team }}: {{ r.lose_probability }}%</span>
+  </div>
+
+  <table class="detail-table">
+    <tr><th>Target</th><td>{{ r.target }}</td></tr>
+    <tr><th>Current Score</th><td>{{ r.current_score }}/{{ r.current_wicket }}</td></tr>
+    <tr><th>Overs</th><td>{{ r.overs_display }}</td></tr>
+    <tr><th>Required Runs</th><td>{{ r.required_runs }}</td></tr>
+    <tr><th>Balls Left</th><td>{{ r.balls_left }}</td></tr>
+    <tr><th>Wickets Left</th><td>{{ r.wickets_left }}</td></tr>
+    <tr><th>Current Run Rate</th><td>{{ r.current_rr }}</td></tr>
+    <tr><th>Required Run Rate</th><td>{{ r.required_rr }}</td></tr>
+  </table>
+
+  <a href="{{ url_for('index') }}" class="btn btn-secondary">New Prediction</a>
+</section>
+
+<section class="card rate-card">
+  <h2>Rate this prediction</h2>
+  <form action="{{ url_for('rate') }}" method="POST" class="rate-form">
+    <input type="hidden" name="prediction_id" value="{{ r.prediction_id }}">
+    <div class="stars">
+      {% for i in range(5, 0, -1) %}
+      <input type="radio" id="star{{ i }}" name="stars" value="{{ i }}" {% if i == 5 %}required{% endif %}>
+      <label for="star{{ i }}">&#9733;</label>
+      {% endfor %}
+    </div>
+    <input type="text" name="comment" placeholder="Optional comment" class="comment-input">
+    <button type="submit" class="btn btn-primary">Submit Rating</button>
+  </form>
+</section>
+{% endblock %}

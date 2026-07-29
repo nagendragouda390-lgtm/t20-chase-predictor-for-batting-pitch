@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Thank You | Vantage Sports Analytics{% endblock %}
+
+{% block content %}
+<section class="card thanks-card">
+  <h1>Thanks for your feedback!</h1>
+  <p>Your rating helps us improve the model and the site.</p>
+  <a href="{{ url_for('index') }}" class="btn btn-primary">Make Another Prediction</a>
+  <a href="{{ url_for('history') }}" class="btn btn-secondary">View History</a>
+</section>
+{% endblock %}

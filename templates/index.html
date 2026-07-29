@@ -1,1 +1,88 @@
+{% extends "base.html" %}
+{% block title %}IPL Chase Predictor | Vantage Sports Analytics{% endblock %}
 
+{% block content %}
+<section class="hero">
+  <h1>IPL Chase Predictor</h1>
+  <p class="hero-sub">Enter the live match situation to estimate the batting team's win probability.</p>
+</section>
+
+<section class="stats-bar">
+  <div class="stat">
+    <span class="stat-value">{{ stats.total_visits }}</span>
+    <span class="stat-label">Total Visits</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">{{ stats.total_predictions }}</span>
+    <span class="stat-label">Predictions Made</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">{{ stats.avg_rating }} / 5</span>
+    <span class="stat-label">Average Rating ({{ stats.total_ratings }})</span>
+  </div>
+</section>
+
+{% if error %}
+<div class="alert alert-error">{{ error }}</div>
+{% endif %}
+
+<section class="card form-card">
+  <form action="{{ url_for('predict') }}" method="POST" class="grid-form">
+
+    <div class="field">
+      <label for="batting_team">Batting Team</label>
+      <select name="batting_team" id="batting_team" required>
+        <option value="" disabled selected>Select team</option>
+        {% for team in teams %}
+        <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="bowling_team">Bowling Team</label>
+      <select name="bowling_team" id="bowling_team" required>
+        <option value="" disabled selected>Select team</option>
+        {% for team in teams %}
+        <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="target">Target Score</label>
+      <input type="number" name="target" id="target" min="1" max="350" required>
+    </div>
+
+    <div class="field">
+      <label for="current_score">Current Score</label>
+      <input type="number" name="current_score" id="current_score" min="0" max="350" required>
+    </div>
+
+    <div class="field">
+      <label for="current_wicket">Wickets Fallen</label>
+      <input type="number" name="current_wicket" id="current_wicket" min="0" max="9" required>
+    </div>
+
+    <div class="field">
+      <label for="overs">Overs Completed <span class="hint">(e.g. 12.3 = 12 overs, 3 balls)</span></label>
+      <input type="text" name="overs" id="overs" placeholder="12.3" pattern="^\d{1,2}(\.[0-5])?$" required>
+    </div>
+
+    <div class="field">
+      <label for="last_5_over_runs">Runs in Last 5 Overs</label>
+      <input type="number" name="last_5_over_runs" id="last_5_over_runs" min="0" max="120" value="0">
+    </div>
+
+    <div class="field">
+      <label for="last_5_over_wickets">Wickets in Last 5 Overs</label>
+      <input type="number" name="last_5_over_wickets" id="last_5_over_wickets" min="0" max="9" value="0">
+    </div>
+
+    <div class="field field-full">
+      <button type="submit" class="btn btn-primary">Predict Win Probability</button>
+    </div>
+
+  </form>
+</section>
+{% endblock %}

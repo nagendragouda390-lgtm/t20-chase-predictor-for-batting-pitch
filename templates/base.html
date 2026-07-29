@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Vantage Sports Analytics{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{{ url_for('index') }}" class="brand">
+        <span class="brand-mark">V</span>
+        <span class="brand-name">Vantage&nbsp;Sports&nbsp;Analytics</span>
+      </a>
+      <nav class="nav">
+        <a href="{{ url_for('index') }}">Predictor</a>
+        <a href="{{ url_for('history') }}">History</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; {{ 2026 }} Vantage Sports Analytics. IPL win-probability modelling powered by logistic regression.</p>
+      <p class="footer-sub">Predictions are statistical estimates for entertainment purposes only.</p>
+    </div>
+  </footer>
+</body>
+</html>

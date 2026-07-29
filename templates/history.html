@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Prediction History | Vantage Sports Analytics{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>Prediction History</h1>
+  <p class="hero-sub">Most recent 50 predictions made on this site.</p>
+</section>
+
+<section class="stats-bar">
+  <div class="stat">
+    <span class="stat-value">{{ stats.total_visits }}</span>
+    <span class="stat-label">Total Visits</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">{{ stats.total_predictions }}</span>
+    <span class="stat-label">Predictions Made</span>
+  </div>
+  <div class="stat">
+    <span class="stat-value">{{ stats.avg_rating }} / 5</span>
+    <span class="stat-label">Average Rating ({{ stats.total_ratings }})</span>
+  </div>
+</section>
+
+<section class="card">
+  <div class="table-scroll">
+  <table class="history-table">
+    <thead>
+      <tr>
+        <th>Time (UTC)</th>
+        <th>Batting</th>
+        <th>Bowling</th>
+        <th>Target</th>
+        <th>Score</th>
+        <th>Overs</th>
+        <th>Win %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row["created_at"][:16].replace("T", " ") }}</td>
+        <td>{{ row["batting_team"] }}</td>
+        <td>{{ row["bowling_team"] }}</td>
+        <td>{{ row["target"] }}</td>
+        <td>{{ row["current_score"] }}/{{ row["current_wicket"] }}</td>
+        <td>{{ row["current_balls"] // 6 }}.{{ row["current_balls"] % 6 }}</td>
+        <td class="{% if row['win_probability'] >= 50 %}win-pos{% else %}win-neg{% endif %}">
+          {{ row["win_probability"] }}%
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="empty-row">No predictions yet — be the first!</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endblock %}
