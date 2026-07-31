@@ -54,7 +54,8 @@ places that would need to change).
 ```
 ipl_app/
 ├── app.py                  Flask app (routes, prediction logic, SQLite)
-├── train_model.py          Rebuilds model/model_lr.pkl
+├── python/
+|   |—— model_training_testing.py     Rebuilds model/model_lr.pkl
 ├── requirements.txt
 ├── Procfile
 ├── model/
