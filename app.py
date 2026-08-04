@@ -9,11 +9,13 @@ from flask import Flask, render_template, request, redirect, url_for, g
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(APP_DIR, "data.db")
 MODEL_PATH = os.path.join(APP_DIR, "model", "model_lr.pkl")
+Model_200 = os.path.join(APP_DIR, "model","model_200+.pkl")
 TEAMS_PATH = os.path.join(APP_DIR, "model", "teams.pkl")
 
 app = Flask(__name__)
 
 model = joblib.load(MODEL_PATH)
+model_200 = joblib.load(Model_200)
 TEAMS = sorted(joblib.load(TEAMS_PATH))
 
 
@@ -159,7 +161,12 @@ def predict():
             "required_runs_per_wicket": required_runs_per_wicket,
         }])
 
-        proba = model.predict_proba(row)[0]
+        if target >= 200:
+            select_model = model_200
+        else:
+            select_model = model
+
+        proba = select_model.predict_proba(row)[0]
         lose_probability = round(float(proba[0]) * 100, 1)
         win_probability = round(float(proba[1]) * 100, 1)
 
