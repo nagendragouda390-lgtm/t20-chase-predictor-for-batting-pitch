@@ -10,6 +10,7 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(APP_DIR, "data.db")
 MODEL_PATH = os.path.join(APP_DIR, "model", "model_lr.pkl")
 Model_200 = os.path.join(APP_DIR, "model","model_big_target.pkl")
+model_150 = os.path.join(APP_DIR, "model","model_150+.pkl")
 TEAMS_PATH = os.path.join(APP_DIR, "model", "teams.pkl")
 
 app = Flask(__name__)
@@ -163,6 +164,8 @@ def predict():
 
         if target >= 200:
             select_model = model_200
+        elif target >= 150:
+            select_model = moddel_150
         else:
             select_model = model
 
