@@ -10,7 +10,7 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(APP_DIR, "data.db")
 MODEL_PATH = os.path.join(APP_DIR, "model", "model_lr.pkl")
 Model_200 = os.path.join(APP_DIR, "model","model_200+.pkl")
-MODEL_175 = os.path.join(APP_DIR, "model","model_150+.pkl")
+MODEL_175 = os.path.join(APP_DIR, "model","model_175+.pkl")
 TEAMS_PATH = os.path.join(APP_DIR, "model", "teams.pkl")
 
 app = Flask(__name__)
