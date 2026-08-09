@@ -12,14 +12,16 @@ MODEL_175 = os.path.join(APP_DIR, "model", "model_175_+.pkl")
 MODEL_200 = os.path.join(APP_DIR, "model","model_200_+.pkl")
 MODEL_150 = os.path.join(APP_DIR, "model","model_150_+.pkl")
 MODEL_120 = os.path.join(APP_DIR, "model","model_120_+.pkl")
-MODEL_LOW = os.path.join(APP_DIR, "model","model_low.pkl")
+MODEL_LOW = os.path.join(APP_DIR, "model","model_low_score.pkl")
 TEAMS_PATH = os.path.join(APP_DIR, "model", "teams.pkl")
 
 app = Flask(__name__)
 
-model = joblib.load(MODEL_PATH)
-model_200 = joblib.load(Model_200)
+model_low = joblib.load(MODEL_LOW)
+model_120 = joblib.load(MODEL_120)
+model_200 = joblib.load(MODEL_200)
 model_175 = joblib.load(MODEL_175)
+model_150 = joblib.load(MODEL_150)
 TEAMS = sorted(joblib.load(TEAMS_PATH))
 
 
@@ -169,8 +171,12 @@ def predict():
             select_model = model_200
         elif target >= 175:
             select_model = model_175
+        elif target >= 150:
+            select_model = model_150
+        elif target >= 120:
+            select_model = model_120
         else:
-            select_model = model
+            select_model = model_low
 
         proba = select_model.predict_proba(row)[0]
         lose_probability = round(float(proba[0]) * 100, 1)
