@@ -48,7 +48,7 @@ history, ratings) resets on redeploys or when the service spins down/up.
 For persistent history in production, swap SQLite for Render's managed
 Postgres later (the `get_db()`/`init_db()` functions in `app.py` are the only
 places that would need to change).
-<img src="images/Screenshot_20260811-113521.png" img>
+<img src="images/Screenshot_20260811-113521.png">
 ## File structure
 
 ```
