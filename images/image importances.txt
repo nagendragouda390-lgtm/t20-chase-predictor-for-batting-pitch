@@ -1,2 +1,0 @@
-- images are the most important things in machine learning 
-- like scatter plot, bar plot, line plot
