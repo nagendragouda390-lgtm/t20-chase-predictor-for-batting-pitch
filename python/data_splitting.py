@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 
-df = pd.read_csv("/storage/emulated/0/data/ipl_ball_by_ball.csv",low_memory=False)
+df = pd.read_csv("ipl_ball_by_ball.csv",low_memory=False)
 
 cols = [
         'match_id',
